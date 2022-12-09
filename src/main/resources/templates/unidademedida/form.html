@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout.html}">
+<meta charset="UTF-8">
+
+ <body th:style="'background-image:url(' + @{/imagens/unidademedida/unidades.jpg} + '); background-repeat: no-repeat, repeat; background-size: cover;'">
+ </body>
+
+<div layout:fragment="content">
+	<div class="alert alert-primary" th:if="${mensagem != null}"
+		th:text="${mensagem}"></div>
+	<div class="card">
+		<div class="card-header">
+			<p class="text-dark">Nova unidade de medida</p>
+		</div>
+		<div class="card-body">
+			<form method="POST" th:object="${unidadeMedida}"
+				th:action="@{/unidademedida/editar}">
+				<input type="hidden" th:field="*{id}">
+
+				<div class="form-group mb-3">
+					<label for="nome">Digite uma unidade de medida:</label> <input
+						class="form-control" type="text" th:field="*{nome}"></input>
+					<div class="text-danger" th:if="${#fields.hasErrors('nome')}"
+						th:errors="*{nome}"></div>
+				</div>
+
+				<div class="form-group mb-3">
+					<label for="sigla">Digite a sigla que representa a unidade
+						de medida:</label> <input class="form-control" type="text"
+						th:field="*{sigla}"></input>
+					<div class="text-danger" th:if="${#fields.hasErrors('sigla')}"
+						th:errors="*{sigla}"></div>
+				</div>
+					
+				<button type="submit" class="btn btn-dark">Salvar unidade de
+					medida</button>
+			</form>
+		</div>
+	</div>
+</div>
+</html>

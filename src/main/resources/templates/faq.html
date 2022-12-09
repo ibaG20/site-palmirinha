@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	layout:decorate="~{layout.html}">
+<meta charset="UTF-8">
+<body
+	th:style="'background-image:url(' + @{/imagens/llogin/llogin.jpg} + '); background-repeat: no-repeat, repeat; background-size: cover;'">
+</body>
+
+<div layout:fragment="content">
+	<div class="card" style="background-color: #f4d0d0">
+		<div class="card-header">
+			<p class="text-dark">FAQ: Perguntas Frequentes</p>
+		</div>
+		<div class="card-body">
+		<h5>Como esse projeto surgiu?</h5>
+		<p>Esse projeto surgiu como um desafio sobre MVC feito pela empresa alemã GFT.</p>
+		<h5>Qual a data limite de entrega do projeto?</h5>
+		<p>O projeto pode ser entregue até o dia 03/07/2022, valendo 02 na nota de entrega.</p>
+		<h5>Qual foi o tempo total de desenvolvimento?</h5>
+		<p>O projeto foi desenvolvido em duas semanas.</p>
+		<h5>Quais são as funcionalidades do site?</h5>
+		<p>O site deve cadastrar e listar receitas, unidades de medida e ingredientes.</p>
+		<h5>Quais são os tipos de login?</h5>
+		<p>Os tipos de login são Administrador, que pode cadastrar receitas, unidades de medida e
+		ingredientes; e Usuário, que pode apenar vizualizar os dados.</p>
+		<h5>Qual é melhor? Java ou C#?</h5>
+		<p>Java <3 </p>
+		<h5>Qual o melhor professor?</h5>
+		<p>O Michel <3 </p>
+		
+		</div>
+	</div>
+</div>
+</html>

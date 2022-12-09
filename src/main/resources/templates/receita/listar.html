@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	layout:decorate="~{layout.html}">
+<meta charset="UTF-8">
+
+ <body th:style="'background-image:url(' + @{/imagens/receita/receitas.jpg} + '); background-repeat: no-repeat, repeat; background-size: cover;'">
+ </body>
+
+
+<div layout:fragment="content">
+	<div class="alert alert-danger" th:if="${#lists.isEmpty(lista)}">
+		Nenhuma receita cadastrada</div>
+	<div class="alert alert-success" th:if="${mensagem != null}"
+		th:text="${mensagem}"></div>
+	<div th:if="${not #lists.isEmpty(lista)}">
+		<div>
+			<table class="table table-success table-responsive">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Nome</th>
+						<th>Tempo Preparo</th>
+						<th>Ingredientes</th>
+						<th>Modo de Preparo</th>
+						<th sec:authorize="hasRole('PG_RECEITA_EDITAR')">Opções</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="receita : ${lista}">
+						<td th:text="${receita.id}"></td>
+						<td th:text="${receita.nome}"></td>
+						<td th:text="${receita.tempoPreparo} + ' min'"></td>
+						<td th:text="${receita.ingredientes}"></td>
+						<td th:text="${receita.modoPreparo}"></td>
+						         <!-- ISSO É PRA TER UM BOTÃO -->
+						<td sec:authorize="hasRole('PG_RECEITA_EDITAR')"><a  class="btn btn-dark btn-sm"
+							th:href="@{/receita/editar(id=${receita.id})}">Editar</a>
+							<a class="btn btn-dark btn-sm"
+							th:href="@{/receita/excluir(id=${receita.id})}"
+							onclick="return confirm('Você realmente deseja excluir essa receita?')">Excluir</a></td>
+						         <!-- TENTAR FAZER ISSO COM O BOOTSTRAP -->
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout.html}">
+<meta charset="UTF-8">
+
+ <body th:style="'background-image:url(' + @{/imagens/receita/receitas.jpg} + '); background-repeat: no-repeat, repeat; background-size: cover;'">
+ </body>
+
+<div layout:fragment="content">
+	<div class="alert alert-primary" th:if="${mensagem != null}"
+		th:text="${mensagem}"></div>
+	<div class="card">
+		<div class="card-header">
+			<p class="text-dark">Nova Receita</p>
+		</div>
+		<div class="card-body">
+			<form method="POST" th:object="${receita}"
+				th:action="@{/receita/editar}">
+				<input type="hidden" th:field="*{id}">
+
+				<div class="form-group mb-3">
+					<label for="nome">Nome:</label> <input class="form-control"
+						type="text" th:field="*{nome}"></input>
+					<div class="text-danger" th:if="${#fields.hasErrors('nome')}"
+						th:errors="*{nome}"></div>
+				</div>
+
+				<div class="input-group mb-3">
+					<label for="tempoPreparo">Tempo de preparo: </label> <input
+						class="input-control" type="text" th:field="*{tempoPreparo}"></input>
+					<div class="text-danger" th:if="${#fields.hasErrors('tempoPreparo')}"
+						th:errors="*{tempoPreparo}"></div>
+					<span class="input-group-text">minutos</span>
+				</div>
+
+				<div class="form-group mb-3">
+					<label for="ingredientes" class="form-label">Ingredientes:</label>
+					<textarea maxlength="2000" class="form-control" id="ingredientes"
+						rows="5" th:field="*{ingredientes}"></textarea>
+					<div class="text-danger" th:if="${#fields.hasErrors('ingredientes')}"
+						th:errors="*{ingredientes}"></div>
+				</div>
+				
+				<div class="form-group mb-3">
+					<label for="modoPreparo" class="form-label">Modo de
+						preparo:</label>
+					<textarea maxlength="2000" class="form-control" id="modoPreparo"
+						rows="5" th:field="*{modoPreparo}"></textarea>
+					<div class="text-danger" th:if="${#fields.hasErrors('modoPreparo')}"
+						th:errors="*{modoPreparo}"></div>
+				</div>
+
+				<button type="submit" class="btn btn-dark">Salvar Receita</button>
+			</form>
+		</div>
+	</div>
+</div>
+</html>

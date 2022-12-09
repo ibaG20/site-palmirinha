@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+		xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	layout:decorate="~{layout.html}">
+<meta charset="UTF-8">
+
+ <body th:style="'background-image:url(' + @{/imagens/unidademedida/unidades.jpg} + '); background-repeat: no-repeat, repeat; background-size: cover;'">
+ </body>
+
+<div layout:fragment="content">
+	<div class="alert alert-danger" th:if="${#lists.isEmpty(lista)}">
+		Nenhuma unidade de medida cadastrada</div>
+	<div class="alert alert-success" th:if="${mensagem != null}"
+		th:text="${mensagem}"></div>
+	<div th:if="${not #lists.isEmpty(lista)}">
+		<div>
+			<table class="table table-success table-responsive">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Nome</th>
+						<th>Sigla</th>
+						<th sec:authorize="hasRole('PG_UNIDADEMEDIDA_EDITAR')">Opções</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="unidadeMedida : ${lista}">
+						<td th:text="${unidadeMedida.id}"></td>
+						<td th:text="${unidadeMedida.nome}"></td>
+						<td th:text="${unidadeMedida.sigla}" width="70%"></td>
+						         <!-- ISSO É PRA TER UM BOTÃO -->
+						<td sec:authorize="hasRole('PG_UNIDADEMEDIDA_EDITAR')"><a class="btn btn-dark btn-sm"
+							th:href="@{/ingrediente/editar(id=${unidadeMedida.id})}">Editar</a>
+							<a class="btn btn-dark btn-sm"
+							th:href="@{/unidademedida/excluir(id=${unidadeMedida.id})}"
+							onclick="return confirm('Você realmente deseja excluir essa unidade de medida?')">Excluir</a></td>
+						         <!-- TENTAR FAZER ISSO COM O BOOTSTRAP -->
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+</html>
